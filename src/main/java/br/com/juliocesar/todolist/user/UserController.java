@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users") // rota para os usuarios
 public class UserController {
 
+    private IUserRepository userRepository; //aqui chamnamos a nossa interfacce
+
     @PostMapping("/")
-    public void create(@RequestBody UserModel userModel){
-        System.out.println(userModel.getName());
+    public UserModel create(@RequestBody UserModel userModel){
+        var userCreated = this.userRepository.save(userModel);
+        return userCreated;
     }
 }
